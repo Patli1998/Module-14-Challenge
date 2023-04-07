@@ -12,19 +12,19 @@ function init() {
     // top 10 OTUS Array
     let sample_values = data.samples[0].sample_values;
     let otu_ids = data.samples[0].otu_ids;
-    let otu_label = data.samples[0].otu_labels;
+    let otu_labels = data.samples[0].otu_labels;
 
     //ten OTUS
-    let topTen = sample_values.slice(0, 10).sort(function(a, b){return b-a});
-    let topIds = otu_ids.slice(0, 10).sort(function(a, b){return b-a});
-    let toplabels = otu_label.slice(0, 10).sort(function(a, b){return b-a});
+    let topTen = sample_values.slice(0, 10).sort((a, b) => b - a);
+    let topIds = otu_ids.slice(0, 10).sort((a, b) => b - a);
+    let toplabels = otu_labels.slice(0, 10).sort((a, b) => b - a);
 
     //metadata
     let firstID = d3.select("#sample-metadata").selectAll('h1').data(d3.entries(data.metadata[0]))
     firstID.enter().append('h1').merge(firstID).text(d => `${d.key} : ${d.value}`).style('font-size','12px')
 
     let barChart = {
-      x: topTen,
+      x: topTen[0],
       y: topIds.map(x => "OTU " + x),
       text: toplabels,
       type: 'bar',
@@ -47,7 +47,7 @@ function init() {
     let bubbleChart = {
       x: otu_ids,
       y: sample_values,
-      text: otu_label,
+      text: otu_labels,
       mode: 'markers',
       marker: {
         color: otu_ids,
