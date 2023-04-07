@@ -16,7 +16,7 @@ function init() {
 
     //ten OTUS
     let topTen = sample_values.slice(0, 10).sort((a, b) => b - a);
-    let topIds = otu_ids.slice(0, 10).sort((a, b) => b - a);
+    let topIds = otu_ids.slice(0, 10);
     let toplabels = otu_labels.slice(0, 10).sort((a, b) => b - a);
 
     //metadata
@@ -24,7 +24,7 @@ function init() {
     firstID.enter().append('h1').merge(firstID).text(d => `${d.key} : ${d.value}`).style('font-size','12px')
 
     let barChart = {
-      x: topTen[0],
+      x: topTen,
       y: topIds.map(x => "OTU " + x),
       text: toplabels,
       type: 'bar',
@@ -35,7 +35,6 @@ function init() {
         order: 'descending'
       }]
     };
-
     var layoutOne = {
       title: '<b>Top Ten OTU<b>'
     };
